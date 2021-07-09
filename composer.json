@@ -1,7 +1,7 @@
 {
-  "name": "tyrion/propel-orm-7",
+  "name": "tyrion/propel-orm-8",
   "type": "library",
-  "description": "ORM framework based on Propel2 with minimum requirements php7.1+",
+  "description": "ORM framework based on Propel2 with minimum requirements php8+",
   "keywords": [
     "ORM",
     "persistence",
