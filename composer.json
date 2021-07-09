@@ -1,0 +1,55 @@
+{
+  "name": "tyrion/propel-orm-7",
+  "type": "library",
+  "description": "ORM framework based on Propel2 with minimum requirements php7.1+",
+  "keywords": [
+    "ORM",
+    "persistence",
+    "Active Record"
+  ],
+  "version": "2.0.1",
+  "prefer-stable": true,
+  "minimum-stability": "stable",
+  "homepage": "http://www.propelorm.org/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "William Durand",
+      "email": "william.durand1@gmail.com"
+    },
+    {
+      "name": "Richard Vaclavik",
+      "email": "riso.vaclavik@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.1",
+    "symfony/yaml": "~2.3||~3.0||~4.0||~5.0",
+    "symfony/console": "~2.3||~3.0||~4.0||~5.0",
+    "symfony/finder": "~2.3||~3.0||~4.0||~5.0",
+    "symfony/validator": "~2.3||~3.0.0||~3.1.0||^3.2.4||~4.0||~5.0",
+    "symfony/filesystem": "~2.3||~3.0||~4.0||~5.0",
+    "symfony/config": "~2.3||~3.0||~4.0||~5.0",
+    "psr/log": "~1.0"
+  },
+  "require-dev": {
+    "monolog/monolog": "~1.3",
+    "phpunit/phpunit": "~9.0"
+  },
+  "suggest": {
+    "monolog/monolog": "The recommended logging library to use with Propel."
+  },
+  "autoload": {
+    "psr-0": {
+      "Propel": "src/"
+    }
+  },
+  "bin": [
+    "bin/propel"
+  ],
+  "extra": {
+    "branch-alias": {
+      "dev-master": "2.1-dev"
+    }
+  }
+}
