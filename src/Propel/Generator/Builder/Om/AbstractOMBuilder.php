@@ -767,7 +767,7 @@ abstract class AbstractOMBuilder extends DataModelBuilder
      */
     protected function extractCrossInformation(
         CrossForeignKeys $crossFKs,
-        $crossFKToIgnore = null,
+        array|string $crossFKToIgnore,
         &$signature,
         &$shortSignature,
         &$normalizedShortSignature,

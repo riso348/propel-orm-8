@@ -284,7 +284,7 @@ abstract class FileLoader extends BaseFileLoader
      *
      * @return mixed The value or null if not found
      */
-    private function getValue($property_key, $config = null, &$found)
+    private function getValue($property_key, ? array $config, &$found)
     {
         if (null === $config) {
             $config = $this->config;
