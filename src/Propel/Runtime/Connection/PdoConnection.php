@@ -67,7 +67,7 @@ class PdoConnection extends \PDO implements ConnectionInterface
      * This is overridden here to allow names corresponding to PDO constant names.
      *
      * @param integer $attribute The attribute to set (e.g. 'PDO::ATTR_CASE', or more simply 'ATTR_CASE').
-     * @param mixed   $value     The attribute value.
+     * @param mixed $value The attribute value.
      *
      * @return bool
      * @throws InvalidArgumentException
@@ -104,7 +104,7 @@ class PdoConnection extends \PDO implements ConnectionInterface
     /**
      * {@inheritDoc}
      */
-    public function query($statement)
+    public function query($statement, $mode = \PDO::ATTR_DEFAULT_FETCH_MODE, ...$fetch_mode_args)
     {
         return parent::query($statement);
     }
@@ -132,7 +132,7 @@ class PdoConnection extends \PDO implements ConnectionInterface
     /**
      * Overwrite. Fixes HHVM strict issue.
      *
-     * @param  null        $name
+     * @param null $name
      * @return string|void
      */
     public function lastInsertId($name = null)
@@ -143,8 +143,8 @@ class PdoConnection extends \PDO implements ConnectionInterface
     /**
      * Overwrite. Fixes HHVM strict issue.
      *
-     * @param  string                                     $statement
-     * @param  array                                      $driver_options
+     * @param string $statement
+     * @param array $driver_options
      * @return bool|\PDOStatement|void
      */
     public function prepare($statement, $driver_options = null)
@@ -155,12 +155,14 @@ class PdoConnection extends \PDO implements ConnectionInterface
     /**
      * Overwrite. Fixes HHVM strict issue.
      *
-     * @param  string $string
-     * @param  int    $parameter_type
+     * @param string $string
+     * @param int $parameter_type
      * @return string
      */
     public function quote($string, $parameter_type = \PDO::PARAM_STR)
     {
         return parent::quote($string, $parameter_type);
     }
+
+
 }

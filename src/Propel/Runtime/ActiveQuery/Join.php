@@ -77,11 +77,11 @@ class Join
      * Use it preferably with no arguments, and then use addCondition() and setJoinType()
      * Syntax with arguments used mainly for backwards compatibility
      *
-     * @param string $leftColumn  The left column of the join condition
+     * @param string $leftColumn The left column of the join condition
      *                            (may contain an alias name)
      * @param string $rightColumn The right column of the join condition
      *                            (may contain an alias name)
-     * @param string $joinType    The type of the join. Valid join types are null (implicit join),
+     * @param string $joinType The type of the join. Valid join types are null (implicit join),
      *                            Criteria::LEFT_JOIN, Criteria::RIGHT_JOIN, and Criteria::INNER_JOIN
      */
     public function __construct($leftColumn = null, $rightColumn = null, $joinType = null)
@@ -105,16 +105,16 @@ class Join
      * Join condition definition.
      * Warning: doesn't support table aliases. Use the explicit methods to use aliases.
      *
-     * @param string $left     The left column of the join condition
+     * @param string $left The left column of the join condition
      *                         (may contain an alias name)
-     * @param string $right    The right column of the join condition
+     * @param string $right The right column of the join condition
      *                         (may contain an alias name)
      * @param string $operator The comparison operator of the join condition, default Join::EQUAL
      */
     public function addCondition($left, $right, $operator = self::EQUAL)
     {
         if (strrpos($left, '.')) {
-            list($this->leftTableName,  $this->left[]) = explode('.', $left);
+            list($this->leftTableName, $this->left[]) = explode('.', $left);
         } else {
             $this->left[] = $left;
         }
@@ -134,8 +134,8 @@ class Join
     /**
      * Join condition definition, for several conditions
      *
-     * @param array $lefts     The left columns of the join condition
-     * @param array $rights    The right columns of the join condition
+     * @param array $lefts The left columns of the join condition
+     * @param array $rights The right columns of the join condition
      * @param array $operators The comparison operators of the join condition, default Join::EQUAL
      * @throws \Propel\Runtime\Exception\LogicException
      */
@@ -152,6 +152,13 @@ class Join
 
     /**
      * Join condition definition.
+     * @param string $leftTableName
+     * @param string $leftColumnName
+     * @param string $leftTableAlias
+     * @param string $rightTableName
+     * @param string $rightColumnName
+     * @param string $rightTableAlias
+     * @param string $operator The comparison operator of the join condition, default Join::EQUAL
      * @example
      * <code>
      * $join = new Join();
@@ -161,13 +168,6 @@ class Join
      * // LEFT JOIN author a ON (book.AUTHOR_ID=a.ID)
      * </code>
      *
-     * @param string $leftTableName
-     * @param string $leftColumnName
-     * @param string $leftTableAlias
-     * @param string $rightTableName
-     * @param string $rightColumnName
-     * @param string $rightTableAlias
-     * @param string $operator        The comparison operator of the join condition, default Join::EQUAL
      */
     public function addExplicitCondition(
         $leftTableName,
@@ -177,10 +177,11 @@ class Join
         $rightColumnName = null,
         $rightTableAlias = null,
         $operator = self::EQUAL
-    ) {
+    )
+    {
         $this->leftTableName = $leftTableName;
-        $this->leftTableAlias  = $leftTableAlias;
-        $this->rightTableName  = $rightTableName;
+        $this->leftTableAlias = $leftTableAlias;
+        $this->rightTableName = $rightTableName;
         $this->rightTableAlias = $rightTableAlias;
         $this->left[] = $leftColumnName;
         $this->leftValues[] = null;
@@ -193,14 +194,14 @@ class Join
     /**
      * @param string $leftTableName
      * @param string $leftColumnName
-     * @param mixed  $leftTableAlias
-     * @param mixed  $leftColumnValue
+     * @param mixed $leftTableAlias
+     * @param mixed $leftColumnValue
      * @param string $operator
      */
-    public function addLocalValueCondition($leftTableName, $leftColumnName, $leftTableAlias = null, $leftColumnValue, $operator = self::EQUAL)
+    public function addLocalValueCondition($leftTableName, $leftColumnName, $leftTableAlias = null, $leftColumnValue = null, $operator = self::EQUAL)
     {
         $this->leftTableName = $leftTableName;
-        $this->leftTableAlias  = $leftTableAlias;
+        $this->leftTableAlias = $leftTableAlias;
         $this->left[] = $leftColumnName;
         $this->leftValues[] = $leftColumnValue;
         $this->rightValues[] = null;
@@ -209,7 +210,7 @@ class Join
         $this->count++;
     }
 
-    public function addForeignValueCondition($rightTableName, $rightColumnName, $rightTableAlias = null, $rightColumnValue, $operator = self::EQUAL)
+    public function addForeignValueCondition($rightTableName, $rightColumnName, $rightTableAlias = null, $rightColumnValue = null, $operator = self::EQUAL)
     {
         $this->rightTableName = $rightTableName;
         $this->rightTableAlias = $rightTableAlias;
@@ -241,9 +242,9 @@ class Join
         $conditions = [];
         for ($i = 0; $i < $this->count; $i++) {
             $conditions[] = [
-                'left'     => $this->getLeftColumn($i),
+                'left' => $this->getLeftColumn($i),
                 'operator' => $this->getOperator($i),
-                'right'    => $this->getRightColumn($i)
+                'right' => $this->getRightColumn($i)
             ];
         }
 
@@ -298,12 +299,12 @@ class Join
     /**
      * Add a left column name to the join condition
      *
+     * @param string $left The name of the left column to add
      * @example
      * <code>
      * $join->setLeftTableName('book');
      * $join->addLeftColumnName('AUTHOR_ID');
      * </code>
-     * @param string $left The name of the left column to add
      */
     public function addLeftColumnName($left)
     {
@@ -323,13 +324,13 @@ class Join
     /**
      * Get the fully qualified name of the left column of the join condition
      *
+     * @param integer $index The number of the condition to use
+     * @return string
      * @example
      * <code>
      * $join->addCondition('book.AUTHOR_ID', 'author.ID');
      * echo $join->getLeftColumn(); // 'book.AUTHOR_ID'
      * </code>
-     * @param  integer $index The number of the condition to use
-     * @return string
      */
     public function getLeftColumn($index = 0)
     {
@@ -341,13 +342,13 @@ class Join
     /**
      * Get the left column name of the join condition
      *
+     * @param integer $index The number of the condition to use
+     * @return string
      * @example
      * <code>
      * $join->addCondition('book.AUTHOR_ID', 'author.ID');
      * echo $join->getLeftColumnName(); // 'AUTHOR_ID'
      * </code>
-     * @param  integer $index The number of the condition to use
-     * @return string
      */
     public function getLeftColumnName($index = 0)
     {
@@ -433,12 +434,12 @@ class Join
     /**
      * Add a right column name to the join condition
      *
+     * @param string $right The name of the right column to add
      * @example
      * <code>
      * $join->setRightTableName('author');
      * $join->addRightColumnName('ID');
      * </code>
-     * @param string $right The name of the right column to add
      */
     public function addRightColumnName($right)
     {
@@ -448,13 +449,13 @@ class Join
     /**
      * Get the fully qualified name of the right column of the join condition
      *
+     * @param integer $index The number of the condition to use
+     * @return string
      * @example
      * <code>
      * $join->addCondition('book.AUTHOR_ID', 'author.ID');
      * echo $join->getLeftColumn(); // 'author.ID'
      * </code>
-     * @param  integer $index The number of the condition to use
-     * @return string
      */
     public function getRightColumn($index = 0)
     {
@@ -466,13 +467,13 @@ class Join
     /**
      * Get the right column name of the join condition
      *
+     * @param integer $index The number of the condition to use
+     * @return string
      * @example
      * <code>
      * $join->addCondition('book.AUTHOR_ID', 'author.ID');
      * echo $join->getLeftColumn(); // 'ID'
      * </code>
-     * @param  integer $index The number of the condition to use
-     * @return string
      */
     public function getRightColumnName($index = 0)
     {
@@ -570,7 +571,7 @@ class Join
      * Set the adapter.
      *
      * The AdapterInterface might be used to get db specific variations of sql.
-     * @param  AdapterInterface $db Value to assign to db.
+     * @param AdapterInterface $db Value to assign to db.
      * @return void
      */
     public function setAdapter(AdapterInterface $db)
@@ -640,6 +641,9 @@ class Join
     /**
      * Get the join clause for this Join.
      * If the join condition needs binding, uses the passed params array.
+     * @param array &$params
+     *
+     * @return string SQL join clause with join condition
      * @example
      * <code>
      * $join = new Join();
@@ -649,9 +653,6 @@ class Join
      * // 'LEFT JOIN author ON (book.AUTHOR_ID=author.ID)'
      * </code>
      *
-     * @param array &$params
-     *
-     * @return string SQL join clause with join condition
      */
     public function getClause(&$params)
     {
@@ -661,12 +662,12 @@ class Join
                 if ($this->leftValues[$i]) {
                     $conditions[] = $this->getLeftColumn($i) . $this->getOperator($i) . var_export($this->leftValues[$i], true);
                 } else if ($this->rightValues[$i]) {
-                        $conditions[] = $this->getRightColumn($i) . $this->getOperator($i) . var_export($this->rightValues[$i], true);
+                    $conditions[] = $this->getRightColumn($i) . $this->getOperator($i) . var_export($this->rightValues[$i], true);
                 } else {
                     $conditions[] = $this->getLeftColumn($i) . $this->getOperator($i) . $this->getRightColumn($i);
                 }
             }
-            $joinCondition = sprintf('(%s)', implode($conditions, ' AND '));
+            $joinCondition = sprintf('(%s)', implode(' AND ', $conditions));
         } else {
             $joinCondition = '';
             $this->getJoinCondition()->appendPsTo($joinCondition, $params);
@@ -698,8 +699,7 @@ class Join
             && $join instanceof Join
             && $this->getJoinType() === $join->getJoinType()
             && $this->getConditions() == $join->getConditions()
-            && $this->getClause($parametersOfThisClauses) == $join->getClause($parametersOfJoinClauses)
-        ;
+            && $this->getClause($parametersOfThisClauses) == $join->getClause($parametersOfJoinClauses);
     }
 
     /**

@@ -37,11 +37,11 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
      * @var array
      */
     protected static $typeMap = [
-        0  => 'PDO::PARAM_NULL',
-        1  => 'PDO::PARAM_INT',
-        2  => 'PDO::PARAM_STR',
-        3  => 'PDO::PARAM_LOB',
-        5  => 'PDO::PARAM_BOOL',
+        0 => 'PDO::PARAM_NULL',
+        1 => 'PDO::PARAM_INT',
+        2 => 'PDO::PARAM_STR',
+        3 => 'PDO::PARAM_LOB',
+        5 => 'PDO::PARAM_BOOL',
     ];
 
     /**
@@ -57,7 +57,7 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
     /**
      * Creates a Statement instance
      *
-     * @param string            $sql        The SQL query for this statement
+     * @param string $sql The SQL query for this statement
      * @param ConnectionWrapper $connection The parent connection
      */
     public function __construct($sql, ConnectionWrapper $connection)
@@ -67,7 +67,7 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
     }
 
     /**
-     * @param  array $options Optional driver options
+     * @param array $options Optional driver options
      * @return $this
      */
     public function prepare($options)
@@ -93,11 +93,11 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
      * as a reference and will only be evaluated at the time that PDOStatement::execute() is called.
      * Returns a boolean value indicating success.
      *
-     * @param integer $pos            Parameter identifier (for determining what to replace in the query).
-     * @param mixed   $value          The value to bind to the parameter.
-     * @param integer $type           Explicit data type for the parameter using the PDO::PARAM_* constants. Defaults to PDO::PARAM_STR.
-     * @param integer $length         Length of the data type. To indicate that a parameter is an OUT parameter from a stored procedure, you must explicitly set the length.
-     * @param mixed   $driver_options
+     * @param integer $pos Parameter identifier (for determining what to replace in the query).
+     * @param mixed $value The value to bind to the parameter.
+     * @param integer $type Explicit data type for the parameter using the PDO::PARAM_* constants. Defaults to PDO::PARAM_STR.
+     * @param integer $length Length of the data type. To indicate that a parameter is an OUT parameter from a stored procedure, you must explicitly set the length.
+     * @param mixed $driver_options
      *
      * @return boolean
      */
@@ -105,7 +105,7 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
     {
         $return = $this->statement->bindParam($pos, $value, $type, $length, $driver_options);
         if ($this->connection->useDebug) {
-            $typestr  = isset(self::$typeMap[$type]) ? self::$typeMap[$type] : '(default)';
+            $typestr = isset(self::$typeMap[$type]) ? self::$typeMap[$type] : '(default)';
             $valuestr = $length > 100 ? '[Large value]' : var_export($value, true);
             $this->boundValues[$pos] = $valuestr;
             $msg = sprintf('Binding %s at position %s w/ PDO type %s', $valuestr, $pos, $typestr);
@@ -119,9 +119,9 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
      * Binds a value to a corresponding named or question mark placeholder in the SQL statement
      * that was use to prepare the statement. Returns a boolean value indicating success.
      *
-     * @param integer $pos   Parameter identifier (for determining what to replace in the query).
-     * @param mixed   $value The value to bind to the parameter.
-     * @param integer $type  Explicit data type for the parameter using the PDO::PARAM_* constants. Defaults to PDO::PARAM_STR.
+     * @param integer $pos Parameter identifier (for determining what to replace in the query).
+     * @param mixed $value The value to bind to the parameter.
+     * @param integer $type Explicit data type for the parameter using the PDO::PARAM_* constants. Defaults to PDO::PARAM_STR.
      *
      * @return boolean
      */
@@ -186,7 +186,7 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
      * Returns a boolean value indicating success.
      * Overridden for query counting and logging.
      *
-     * @param  array   $input_parameters
+     * @param array $input_parameters
      * @return boolean
      */
     public function execute($input_parameters = null)
@@ -211,7 +211,7 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
         $matches = [];
         if (preg_match_all('/(:p[0-9]+\b)/', $sql, $matches)) {
             $size = count($matches[1]);
-            for ($i = $size-1; $i >= 0; $i--) {
+            for ($i = $size - 1; $i >= 0; $i--) {
                 $pos = $matches[1][$i];
                 if (isset($this->boundValues[$pos]))
                     $sql = str_replace($pos, $this->boundValues[$pos], $sql);
@@ -245,7 +245,7 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
      *
      * @return array
      */
-    public function fetchAll($fetchStyle = \PDO::FETCH_BOTH, $fetchArgument = null, $ctorArgs = [])
+    public function fetchAll($fetchStyle = \PDO::FETCH_BOTH, ...$args)
     {
         return $this->statement->fetchAll($fetchStyle);
     }
@@ -287,7 +287,7 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
      *
      * @return \Traversable
      */
-    public function getIterator()
+    public function getIterator():\Iterator
     {
         return $this->statement;
     }

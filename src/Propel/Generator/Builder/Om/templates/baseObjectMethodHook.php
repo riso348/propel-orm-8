@@ -7,8 +7,10 @@
      */
     public function preSave(ConnectionInterface $con = null)
     {
-        if (is_callable('parent::preSave')) {
-	        return parent::preSave($con);
+        $refObj = new \ReflectionObject($this);
+        if ($refObj->getParentClass()) {
+            $method = $refObj->getParentClass()->getMethod('preSave');
+            return $method->invoke($this, $con);
         }
         return true;
     }
@@ -21,8 +23,10 @@
      */
     public function postSave(ConnectionInterface $con = null)
     {
-        if (is_callable('parent::postSave')) {
-	        parent::postSave($con);
+        $refObj = new \ReflectionObject($this);
+        if ($refObj->getParentClass()) {
+            $method = $refObj->getParentClass()->getMethod('postSave');
+            $method->invoke($this, $con);
         }
     }
 
@@ -35,8 +39,10 @@
      */
     public function preInsert(ConnectionInterface $con = null)
     {
-        if (is_callable('parent::preInsert')) {
-	        return parent::preInsert($con);
+        $refObj = new \ReflectionObject($this);
+        if ($refObj->getParentClass()) {
+            $method = $refObj->getParentClass()->getMethod('preInsert');
+            return $method->invoke($this, $con);
         }
         return true;
     }
@@ -49,8 +55,10 @@
      */
     public function postInsert(ConnectionInterface $con = null)
     {
-        if (is_callable('parent::postInsert')) {
-	        parent::postInsert($con);
+        $refObj = new \ReflectionObject($this);
+        if ($refObj->getParentClass()) {
+            $method = $refObj->getParentClass()->getMethod('postInsert');
+            $method->invoke($this, $con);
         }
     }
 
@@ -63,8 +71,10 @@
      */
     public function preUpdate(ConnectionInterface $con = null)
     {
-        if (is_callable('parent::preUpdate')) {
-	        return parent::preUpdate($con);
+        $refObj = new \ReflectionObject($this);
+        if ($refObj->getParentClass()) {
+            $method = $refObj->getParentClass()->getMethod('preUpdate');
+            return $method->invoke($this, $con);
         }
         return true;
     }
@@ -77,8 +87,10 @@
      */
     public function postUpdate(ConnectionInterface $con = null)
     {
-        if (is_callable('parent::postUpdate')) {
-	        parent::postUpdate($con);
+        $refObj = new \ReflectionObject($this);
+        if ($refObj->getParentClass()) {
+            $method = $refObj->getParentClass()->getMethod('postUpdate');
+            $method->invoke($this, $con);
         }
     }
 
@@ -91,8 +103,10 @@
      */
     public function preDelete(ConnectionInterface $con = null)
     {
-        if (is_callable('parent::preDelete')) {
-	        return parent::preDelete($con);
+        $refObj = new \ReflectionObject($this);
+        if ($refObj->getParentClass()) {
+            $method = $refObj->getParentClass()->getMethod('preDelete');
+            return $method->invoke($this, $con);
         }
         return true;
     }
@@ -105,8 +119,10 @@
      */
     public function postDelete(ConnectionInterface $con = null)
     {
-        if (is_callable('parent::postDelete')) {
-	        parent::postDelete($con);
+        $refObj = new \ReflectionObject($this);
+        if ($refObj->getParentClass()) {
+            $method = $refObj->getParentClass()->getMethod('postDelete');
+            $method->invoke($this, $con);
         }
     }
 
