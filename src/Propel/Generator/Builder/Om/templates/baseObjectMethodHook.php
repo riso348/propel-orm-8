@@ -8,7 +8,7 @@
     public function preSave(ConnectionInterface $con = null)
     {
         $refObj = new \ReflectionObject($this);
-        if ($refObj->getParentClass()) {
+        if ($refObj->getParentClass() && $refObj->getParentClass()->getName() !== self::class) {
             $method = $refObj->getParentClass()->getMethod('preSave');
             return $method->invoke($this, $con);
         }
@@ -24,7 +24,7 @@
     public function postSave(ConnectionInterface $con = null)
     {
         $refObj = new \ReflectionObject($this);
-        if ($refObj->getParentClass()) {
+        if ($refObj->getParentClass() && $refObj->getParentClass()->getName() !== self::class) {
             $method = $refObj->getParentClass()->getMethod('postSave');
             $method->invoke($this, $con);
         }
@@ -40,7 +40,7 @@
     public function preInsert(ConnectionInterface $con = null)
     {
         $refObj = new \ReflectionObject($this);
-        if ($refObj->getParentClass()) {
+        if ($refObj->getParentClass() && $refObj->getParentClass()->getName() !== self::class) {
             $method = $refObj->getParentClass()->getMethod('preInsert');
             return $method->invoke($this, $con);
         }
@@ -56,7 +56,7 @@
     public function postInsert(ConnectionInterface $con = null)
     {
         $refObj = new \ReflectionObject($this);
-        if ($refObj->getParentClass()) {
+        if ($refObj->getParentClass() && $refObj->getParentClass()->getName() !== self::class) {
             $method = $refObj->getParentClass()->getMethod('postInsert');
             $method->invoke($this, $con);
         }
@@ -72,7 +72,7 @@
     public function preUpdate(ConnectionInterface $con = null)
     {
         $refObj = new \ReflectionObject($this);
-        if ($refObj->getParentClass()) {
+        if ($refObj->getParentClass() && $refObj->getParentClass()->getName() !== self::class) {
             $method = $refObj->getParentClass()->getMethod('preUpdate');
             return $method->invoke($this, $con);
         }
@@ -88,7 +88,7 @@
     public function postUpdate(ConnectionInterface $con = null)
     {
         $refObj = new \ReflectionObject($this);
-        if ($refObj->getParentClass()) {
+        if ($refObj->getParentClass() && $refObj->getParentClass()->getName() !== self::class) {
             $method = $refObj->getParentClass()->getMethod('postUpdate');
             $method->invoke($this, $con);
         }
@@ -104,7 +104,7 @@
     public function preDelete(ConnectionInterface $con = null)
     {
         $refObj = new \ReflectionObject($this);
-        if ($refObj->getParentClass()) {
+        if ($refObj->getParentClass() && $refObj->getParentClass()->getName() !== self::class) {
             $method = $refObj->getParentClass()->getMethod('preDelete');
             return $method->invoke($this, $con);
         }
@@ -120,7 +120,7 @@
     public function postDelete(ConnectionInterface $con = null)
     {
         $refObj = new \ReflectionObject($this);
-        if ($refObj->getParentClass()) {
+        if ($refObj->getParentClass() && $refObj->getParentClass()->getName() !== self::class) {
             $method = $refObj->getParentClass()->getMethod('postDelete');
             $method->invoke($this, $con);
         }
