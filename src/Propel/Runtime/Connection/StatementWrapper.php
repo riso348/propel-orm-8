@@ -101,7 +101,7 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
      *
      * @return boolean
      */
-    public function bindParam(string|int $pos, mixed &$value, int $type = PDO::PARAM_STR, int $length = 0, mixed $driver_options = null): bool
+    public function bindParam(string|int $pos, mixed &$value, int $type = \PDO::PARAM_STR, int $length = 0, mixed $driver_options = null): bool
     {
         $return = $this->statement->bindParam($pos, $value, $type, $length, $driver_options);
         if ($this->connection->useDebug) {
@@ -245,7 +245,7 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
      *
      * @return array
      */
-    public function fetchAll(int $mode = PDO::FETCH_DEFAULT, mixed ...$args): array
+    public function fetchAll(int $mode = \PDO::FETCH_DEFAULT, mixed ...$args): array
     {
         return $this->statement->fetchAll($mode);
     }
