@@ -67,7 +67,7 @@ class PDODataFetcher extends AbstractDataFetcher
     /**
      * {@inheritDoc}
      */
-    public function next()
+    public function next():void
     {
         if (null !== $this->dataObject) {
             $this->current = $this->dataObject->fetch($this->style);
@@ -80,7 +80,7 @@ class PDODataFetcher extends AbstractDataFetcher
     /**
      * {@inheritDoc}
      */
-    public function current()
+    public function current():mixed
     {
         return $this->current;
     }
@@ -88,7 +88,7 @@ class PDODataFetcher extends AbstractDataFetcher
     /**
      * {@inheritDoc}
      */
-    public function key()
+    public function key():mixed
     {
         return $this->index;
     }
@@ -96,7 +96,7 @@ class PDODataFetcher extends AbstractDataFetcher
     /**
      * {@inheritDoc}
      */
-    public function valid()
+    public function valid():bool
     {
         return null !== $this->current && false !== $this->current;
     }
@@ -106,7 +106,7 @@ class PDODataFetcher extends AbstractDataFetcher
      * It actually fetches the first row, since a foreach in php triggers that
      * function as init.
      */
-    public function rewind()
+    public function rewind():void
     {
         if ($this->dataObject)
             $this->current = $this->dataObject->fetch($this->style);
@@ -115,7 +115,7 @@ class PDODataFetcher extends AbstractDataFetcher
     /**
      * {@inheritDoc}
      */
-    public function close()
+    public function close():void
     {
         $this->getDataObject()->closeCursor();
         $this->setDataObject(null); //so the connection can be garbage collected
@@ -126,7 +126,7 @@ class PDODataFetcher extends AbstractDataFetcher
     /**
      * {@inheritDoc}
      */
-    public function count()
+    public function count():int
     {
         if ($this->dataObject && 'sqlite' === $this->dataObject->getConnection()->getAttribute(\PDO::ATTR_DRIVER_NAME)) {
             $lastQuery = $this->dataObject->getStatement()->queryString;

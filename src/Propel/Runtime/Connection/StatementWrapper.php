@@ -70,7 +70,7 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
      * @param array $options Optional driver options
      * @return $this
      */
-    public function prepare($options)
+    public function prepare(array $options)
     {
         $this->statement = $this->connection->getWrappedConnection()->prepare($this->sql, $options);
 
@@ -101,7 +101,7 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
      *
      * @return boolean
      */
-    public function bindParam($pos, &$value, $type = \PDO::PARAM_STR, $length = 0, $driver_options = null)
+    public function bindParam(string|int $pos, mixed &$value, int $type = PDO::PARAM_STR, int $length = 0, mixed $driver_options = null): bool
     {
         $return = $this->statement->bindParam($pos, $value, $type, $length, $driver_options);
         if ($this->connection->useDebug) {
@@ -125,7 +125,7 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
      *
      * @return boolean
      */
-    public function bindValue($pos, $value, $type = \PDO::PARAM_STR)
+    public function bindValue(string|int $pos, mixed $value, int $type = \PDO::PARAM_STR):bool
     {
         $return = $this->statement->bindValue($pos, $value, $type);
         if ($this->connection->useDebug) {
@@ -153,7 +153,7 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
      *
      * @return boolean Returns TRUE on success or FALSE on failure.
      */
-    public function closeCursor()
+    public function closeCursor():bool
     {
         return $this->statement->closeCursor();
     }
@@ -175,7 +175,7 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
      *                 by the PDOStatement object. If there is no result set,
      *                 this method should return 0.
      */
-    public function columnCount()
+    public function columnCount():int
     {
         return $this->statement->columnCount();
     }
@@ -189,7 +189,7 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
      * @param array $input_parameters
      * @return boolean
      */
-    public function execute($input_parameters = null)
+    public function execute(?array $input_parameters = null):bool
     {
         $return = $this->statement->execute($input_parameters);
         if ($this->connection->useDebug) {
@@ -233,9 +233,9 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
      *
      * @return mixed
      */
-    public function fetch($fetchStyle = \PDO::FETCH_BOTH, $cursorOrientation = \PDO::FETCH_ORI_NEXT, $cursorOffset = 0)
+    public function fetch(int $mode = \PDO::FETCH_DEFAULT, int $cursorOrientation = \PDO::FETCH_ORI_NEXT, int $cursorOffset = 0): mixed
     {
-        return $this->statement->fetch($fetchStyle);
+        return $this->statement->fetch($mode);
     }
 
     /**
@@ -245,9 +245,9 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
      *
      * @return array
      */
-    public function fetchAll($fetchStyle = \PDO::FETCH_BOTH, ...$args)
+    public function fetchAll(int $mode = PDO::FETCH_DEFAULT, mixed ...$args): array
     {
-        return $this->statement->fetchAll($fetchStyle);
+        return $this->statement->fetchAll($mode);
     }
 
     /**
@@ -259,7 +259,7 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
      *
      * @return string A single column in the next row of a result set.
      */
-    public function fetchColumn($columnIndex = 0)
+    public function fetchColumn(int $columnIndex = 0): mixed
     {
         return $this->statement->fetchColumn($columnIndex);
     }
@@ -277,7 +277,7 @@ class StatementWrapper extends \PDOStatement implements \IteratorAggregate
      *
      * @return integer The number of rows.
      */
-    public function rowCount()
+    public function rowCount():int
     {
         return $this->statement->rowCount();
     }

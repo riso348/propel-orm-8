@@ -27,7 +27,7 @@ interface DataFetcherInterface extends \Iterator, \Countable
      * @link http://php.net/manual/en/iterator.current.php
      * @return mixed Can return any type.
      */
-    public function current();
+    public function current():mixed;
 
     /**
      * Move forward to next element
@@ -35,7 +35,7 @@ interface DataFetcherInterface extends \Iterator, \Countable
      * @link http://php.net/manual/en/iterator.next.php
      * @return void Any returned value is ignored.
      */
-    public function next();
+    public function next():void;
 
     /**
      * Return the key of the current element
@@ -43,7 +43,7 @@ interface DataFetcherInterface extends \Iterator, \Countable
      * @link http://php.net/manual/en/iterator.key.php
      * @return mixed scalar on success, or null on failure.
      */
-    public function key();
+    public function key():mixed;
 
     /**
      * Checks if current position is valid
@@ -52,7 +52,7 @@ interface DataFetcherInterface extends \Iterator, \Countable
      * @return boolean The return value will be casted to boolean and then evaluated.
      *                 Returns true on success or false on failure.
      */
-    public function valid();
+    public function valid():bool;
 
     /**
      * Rewind the Iterator to the first element
@@ -60,7 +60,7 @@ interface DataFetcherInterface extends \Iterator, \Countable
      * @link http://php.net/manual/en/iterator.rewind.php
      * @return void Any returned value is ignored.
      */
-    public function rewind();
+    public function rewind():void;
 
     /**
      * Returns the data of the first column of the next row,
@@ -70,7 +70,7 @@ interface DataFetcherInterface extends \Iterator, \Countable
      *
      * @return mixed|null
      */
-    public function fetchColumn($index = null);
+    public function fetchColumn(?int $index = null);
 
     /**
      * Returns the data of the next row,
@@ -83,14 +83,14 @@ interface DataFetcherInterface extends \Iterator, \Countable
     /**
      * Frees the resultSet.
      */
-    public function close();
+    public function close():void;
 
     /**
      * Returns the count of items in the resultSet.
      *
      * @return int
      */
-    public function count();
+    public function count():int;
 
     /**
      * Returns the TableMap::TYPE_*

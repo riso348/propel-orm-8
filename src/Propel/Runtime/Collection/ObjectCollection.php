@@ -401,7 +401,7 @@ class ObjectCollection extends Collection
     /**
      * @param mixed $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset):void
     {
         if (isset($this->data[$offset])) {
             if (is_object($this->data[$offset])) {
@@ -425,7 +425,7 @@ class ObjectCollection extends Collection
     /**
      * @param mixed $value
      */
-    public function append($value)
+    public function append($value):void
     {
         if (!is_object($value)) {
             parent::append($value);
@@ -445,7 +445,7 @@ class ObjectCollection extends Collection
      * @param mixed $offset
      * @param mixed $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value):void
     {
         if (!is_object($value)) {
             parent::offsetSet($offset, $value);

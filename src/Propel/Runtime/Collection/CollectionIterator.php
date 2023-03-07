@@ -187,58 +187,58 @@ class CollectionIterator extends \ArrayIterator
         return !$this->isOdd();
     }
 
-    public function offsetSet($index, $newval)
+    public function offsetSet($index, $newval):void
     {
         $this->collection->offsetSet($index, $newval);
         parent::offsetSet($index, $newval);
         $this->refreshPositions();
     }
 
-    public function offsetUnset($index)
+    public function offsetUnset($index):void
     {
         $this->collection->offsetUnset($index);
         parent::offsetUnset($index);
         $this->refreshPositions();
     }
 
-    public function append($value)
+    public function append($value):void
     {
         $this->collection->append($value);
         parent::append($value);
         $this->refreshPositions();
     }
 
-    public function asort($flags = SORT_REGULAR)
+    public function asort($flags = SORT_REGULAR):bool
     {
         parent::asort($flags);
         $this->refreshPositions();
     }
 
-    public function ksort($flags = SORT_REGULAR)
+    public function ksort($flags = SORT_REGULAR):bool
     {
         parent::ksort($flags);
         $this->refreshPositions();
     }
 
-    public function uasort($cmp_function)
+    public function uasort($cmp_function):bool
     {
         parent::uasort($cmp_function);
         $this->refreshPositions();
     }
 
-    public function uksort($cmp_function)
+    public function uksort($cmp_function):bool
     {
         parent::uksort($cmp_function);
         $this->refreshPositions();
     }
 
-    public function natsort()
+    public function natsort():bool
     {
         parent::natsort();
         $this->refreshPositions();
     }
 
-    public function natcasesort()
+    public function natcasesort():bool
     {
         parent::natcasesort();
         $this->refreshPositions();

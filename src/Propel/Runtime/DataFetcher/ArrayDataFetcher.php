@@ -48,7 +48,7 @@ class ArrayDataFetcher extends AbstractDataFetcher
     /**
      * {@inheritDoc}
      */
-    public function key()
+    public function key():mixed
     {
         return null === $this->dataObject ? null : key($this->dataObject);
     }
@@ -56,7 +56,7 @@ class ArrayDataFetcher extends AbstractDataFetcher
     /**
      * {@inheritDoc}
      */
-    public function valid()
+    public function valid():bool
     {
         return (null !== $this->dataObject && null !== key($this->dataObject));
     }
@@ -64,9 +64,9 @@ class ArrayDataFetcher extends AbstractDataFetcher
     /**
      * {@inheritDoc}
      */
-    public function rewind()
+    public function rewind():void
     {
-        return null === $this->dataObject ? null : reset($this->dataObject);
+        null === $this->dataObject ? null : reset($this->dataObject);
     }
 
     /**
@@ -80,7 +80,7 @@ class ArrayDataFetcher extends AbstractDataFetcher
     /**
      * {@inheritDoc}
      */
-    public function count()
+    public function count():int
     {
         return null === $this->dataObject ? null : count($this->dataObject);
     }

@@ -223,7 +223,7 @@ class BaseModelCriteria extends Criteria implements \IteratorAggregate
      *
      * @throws LogicException
      */
-    public function getIterator()
+    public function getIterator():\Traversable
     {
         $res = $this->find(null); // use the default connection
         if ($res instanceof \IteratorAggregate) {

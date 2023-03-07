@@ -72,7 +72,7 @@ class PdoConnection extends \PDO implements ConnectionInterface
      * @return bool
      * @throws InvalidArgumentException
      */
-    public function setAttribute($attribute, $value)
+    public function setAttribute(int $attribute, mixed $value):bool
     {
         if (is_string($attribute) && false === strpos($attribute, '::')) {
             $attribute = '\PDO::' . $attribute;
@@ -104,7 +104,7 @@ class PdoConnection extends \PDO implements ConnectionInterface
     /**
      * {@inheritDoc}
      */
-    public function query($statement, $mode = \PDO::ATTR_DEFAULT_FETCH_MODE, ...$fetch_mode_args)
+    public function query(string $statement, ?int $mode = \PDO::ATTR_DEFAULT_FETCH_MODE, ...$fetch_mode_args):\PDOStatement|false
     {
         return parent::query($statement);
     }
@@ -112,7 +112,7 @@ class PdoConnection extends \PDO implements ConnectionInterface
     /**
      * {@inheritDoc}
      */
-    public function exec($statement)
+    public function exec(string $statement): int|false
     {
         $stmt = parent::exec($statement);
 
@@ -124,7 +124,7 @@ class PdoConnection extends \PDO implements ConnectionInterface
      *
      * @return bool|void
      */
-    public function inTransaction()
+    public function inTransaction():bool
     {
         return parent::inTransaction();
     }
@@ -135,7 +135,7 @@ class PdoConnection extends \PDO implements ConnectionInterface
      * @param null $name
      * @return string|void
      */
-    public function lastInsertId($name = null)
+    public function lastInsertId(?string $name = null): string|false
     {
         return parent::lastInsertId($name);
     }
@@ -147,9 +147,9 @@ class PdoConnection extends \PDO implements ConnectionInterface
      * @param array $driver_options
      * @return bool|\PDOStatement|void
      */
-    public function prepare($statement, $driver_options = null)
+    public function prepare(string $query, array $options = []):\PDOStatement|false
     {
-        return parent::prepare($statement, $driver_options ?: []);
+        return parent::prepare($query, $options ?: []);
     }
 
     /**
@@ -159,7 +159,7 @@ class PdoConnection extends \PDO implements ConnectionInterface
      * @param int $parameter_type
      * @return string
      */
-    public function quote($string, $parameter_type = \PDO::PARAM_STR)
+    public function quote(string $string, int $parameter_type = \PDO::PARAM_STR):string|false
     {
         return parent::quote($string, $parameter_type);
     }

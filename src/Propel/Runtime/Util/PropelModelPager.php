@@ -10,6 +10,7 @@
 
 namespace Propel\Runtime\Util;
 
+use Google\Service\NetworkManagement\Trace;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
 use Propel\Runtime\Collection\Collection;
 use Propel\Runtime\Connection\ConnectionInterface;
@@ -388,12 +389,12 @@ class PropelModelPager implements \IteratorAggregate, \Countable
      *
      * @return boolean
      */
-    public function isEmpty()
+    public function isEmpty():bool
     {
         return $this->getResults()->isEmpty();
     }
 
-    public function getIterator()
+    public function getIterator():\Traversable
     {
         return $this->getResults()->getIterator();
     }
@@ -404,7 +405,7 @@ class PropelModelPager implements \IteratorAggregate, \Countable
      * @see Countable
      * @return int
      */
-    public function count()
+    public function count():int
     {
         return count($this->getResults());
     }

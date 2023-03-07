@@ -38,7 +38,7 @@ use Propel\Runtime\Map\TableMap;
  *
  * @author Francois Zaninotto
  */
-class Collection implements \ArrayAccess, \IteratorAggregate, \Countable, \Serializable
+class Collection implements \ArrayAccess, \IteratorAggregate, \Countable
 {
     /**
      * @var string
@@ -75,7 +75,7 @@ class Collection implements \ArrayAccess, \IteratorAggregate, \Countable, \Seria
     /**
      * @param mixed $value
      */
-    public function append($value)
+    public function append($value):void
     {
         $this->data[] = $value;
     }
@@ -84,7 +84,7 @@ class Collection implements \ArrayAccess, \IteratorAggregate, \Countable, \Seria
      * @param  mixed $offset
      * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset):bool
     {
         return isset($this->data[$offset]);
     }
@@ -93,7 +93,7 @@ class Collection implements \ArrayAccess, \IteratorAggregate, \Countable, \Seria
      * @param  mixed $offset
      * @return mixed
      */
-    public function &offsetGet($offset)
+    public function &offsetGet($offset):mixed
     {
         if (isset($this->data[$offset])) {
             return $this->data[$offset];
@@ -104,7 +104,7 @@ class Collection implements \ArrayAccess, \IteratorAggregate, \Countable, \Seria
      * @param mixed $offset
      * @param mixed $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value):void
     {
         if (is_null($offset)) {
             $this->data[] = $value;
@@ -116,7 +116,7 @@ class Collection implements \ArrayAccess, \IteratorAggregate, \Countable, \Seria
     /**
      * @param mixed $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset):void
     {
         unset($this->data[$offset]);
     }
@@ -160,7 +160,7 @@ class Collection implements \ArrayAccess, \IteratorAggregate, \Countable, \Seria
     /**
      * @return CollectionIterator
      */
-    public function getIterator()
+    public function getIterator():\Traversable
     {
         return new CollectionIterator($this);
     }
@@ -170,7 +170,7 @@ class Collection implements \ArrayAccess, \IteratorAggregate, \Countable, \Seria
      *
      * @return int
      */
-    public function count()
+    public function count():int
     {
         return count($this->data);
     }

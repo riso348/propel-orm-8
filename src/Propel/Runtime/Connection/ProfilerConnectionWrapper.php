@@ -62,7 +62,7 @@ class ProfilerConnectionWrapper extends ConnectionWrapper
      * @param string $attribute The attribute name, or the constant name containing the attribute name (e.g. 'PDO::ATTR_CASE')
      * @param mixed  $value
      */
-    public function setAttribute($attribute, $value)
+    public function setAttribute(int $attribute, mixed $value): bool
     {
         switch ($attribute) {
             case 'isSlowOnly':

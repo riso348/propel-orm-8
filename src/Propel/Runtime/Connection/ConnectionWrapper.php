@@ -332,7 +332,7 @@ class ConnectionWrapper implements ConnectionInterface, LoggerAwareInterface
      * @param string $attribute The attribute name, or the constant name containing the attribute name (e.g. 'PDO::ATTR_CASE')
      * @param mixed  $value
      */
-    public function setAttribute($attribute, $value)
+    public function setAttribute(int $attribute, mixed $value): bool
     {
         if (is_string($attribute)) {
             if (false === strpos($attribute, '::')) {
@@ -372,7 +372,7 @@ class ConnectionWrapper implements ConnectionInterface, LoggerAwareInterface
      *
      * @return \PDOStatement
      */
-    public function prepare($statement, $driver_options = null)
+    public function prepare(string $statement, array $driver_options = [])
     {
         $statementWrapper = null;
 
@@ -400,7 +400,7 @@ class ConnectionWrapper implements ConnectionInterface, LoggerAwareInterface
      * @param  string  $sql
      * @return integer
      */
-    public function exec($sql)
+    public function exec(string $sql): int|false
     {
         $return = $this->connection->exec($sql);
 
@@ -457,7 +457,7 @@ class ConnectionWrapper implements ConnectionInterface, LoggerAwareInterface
      *                SQL statement. Returns FALSE if the driver does not support
      *                quoting in this way.
      */
-    public function quote($string, $parameter_type = 2)
+    public function quote(string $string, int $parameter_type = 2):string|false
     {
         return $this->connection->quote($string, $parameter_type);
     }
@@ -507,7 +507,7 @@ class ConnectionWrapper implements ConnectionInterface, LoggerAwareInterface
      *                a string representing the last value retrieved from the specified
      *                sequence object.
      */
-    public function lastInsertId($name = null)
+    public function lastInsertId(?string $name = null): string|false
     {
         return $this->connection->lastInsertId($name);
     }

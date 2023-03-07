@@ -2645,7 +2645,7 @@ class Criteria
                 $stmt = null; // close
             }
             Propel::log($e->getMessage(), Propel::LOG_ERR);
-            throw new PropelException(sprintf('Unable to execute SELECT statement [%s]', $sql), null, $e);
+            throw new PropelException(sprintf('Unable to execute SELECT statement [%s]', $sql), 0, $e);
         }
 
         return $con->getDataFetcher($stmt);

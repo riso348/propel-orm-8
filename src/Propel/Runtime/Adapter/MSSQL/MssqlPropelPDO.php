@@ -135,7 +135,7 @@ class MssqlPropelPDO extends PropelPDO
      * @param  string  $seqname
      * @return integer
      */
-    public function lastInsertId($seqname = null)
+    public function lastInsertId(?string $name = null): string|false
     {
         $result = self::query('SELECT SCOPE_IDENTITY()');
 

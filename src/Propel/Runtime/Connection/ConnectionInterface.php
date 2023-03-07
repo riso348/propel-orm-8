@@ -90,7 +90,7 @@ interface ConnectionInterface
      *
      * @return boolean TRUE on success or FALSE on failure.
      */
-    public function setAttribute($attribute, $value);
+    public function setAttribute(int $attribute, mixed $value):bool;
 
     /**
      * Returns the ID of the last inserted row or sequence value.
@@ -109,7 +109,7 @@ interface ConnectionInterface
      *                a string representing the last value retrieved from the specified
      *                sequence object.
      */
-    public function lastInsertId($name = null);
+    public function lastInsertId(?string $name = null): string|false;
 
     /**
      * @param $data
@@ -148,7 +148,7 @@ interface ConnectionInterface
      * @return int The number of rows that were modified or deleted by the SQL
      *             statement you issued. If no rows were affected, returns 0.
      */
-    public function exec($statement);
+    public function exec(string $statement):int|false;
 
     /**
      * Prepares a statement for execution and returns a statement object.
@@ -170,7 +170,7 @@ interface ConnectionInterface
 
      * @throws \Propel\Runtime\Connection\Exception\ConnectionException depending on error handling.
      */
-    public function prepare($statement, $driver_options = null);
+    public function prepare(string $statement, array $driver_options = []);
 
     /**
      * Executes an SQL statement, returning a result set as a Statement object.
@@ -181,7 +181,7 @@ interface ConnectionInterface
      * @return \Propel\Runtime\DataFetcher\DataFetcherInterface
      * @throws \Propel\Runtime\Connection\Exception\ConnectionException depending on error handling.
      */
-    public function query($statement);
+    public function query(string $statement);
 
     /**
      * Quotes a string for use in a query.
@@ -198,5 +198,5 @@ interface ConnectionInterface
      *                SQL statement. Returns FALSE if the driver does not support
      *                quoting in this way.
      */
-    public function quote($string, $parameter_type = \PDO::PARAM_STR);
+    public function quote(string $string, int $parameter_type = \PDO::PARAM_STR):string|false;
 }
