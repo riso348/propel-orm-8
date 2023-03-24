@@ -74,7 +74,7 @@ abstract class ScopedMappingModel extends MappingModel
      *
      * @param string $namespace
      */
-    public function setNamespace($namespace)
+    public function setNamespace(string $namespace)
     {
         $namespace = rtrim(trim($namespace), '\\');
 
