@@ -114,9 +114,7 @@ class PdoConnection extends \PDO implements ConnectionInterface
      */
     public function exec(string $statement): int|false
     {
-        $stmt = parent::exec($statement);
-
-        return $this->getDataFetcher($stmt);
+        return parent::exec($statement);
     }
 
     /**
