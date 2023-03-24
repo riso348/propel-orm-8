@@ -97,7 +97,7 @@ abstract class ScopedMappingModel extends MappingModel
      * @param  string  $namespace
      * @return boolean
      */
-    public function isAbsoluteNamespace($namespace)
+    public function isAbsoluteNamespace(string|null $namespace)
     {
         return 0 === strpos(strval($namespace), '\\');
     }
