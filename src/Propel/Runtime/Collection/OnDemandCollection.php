@@ -104,7 +104,7 @@ class OnDemandCollection extends Collection
     /**
      * @return OnDemandIterator
      */
-    public function getIterator()
+    public function getIterator():\Iterator
     {
         return $this->lastIterator;
     }
@@ -117,7 +117,7 @@ class OnDemandCollection extends Collection
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset):bool
     {
         throw new PropelException('The On Demand Collection does not allow access by offset');
     }
@@ -128,7 +128,7 @@ class OnDemandCollection extends Collection
      *
      * @return mixed
      */
-    public function &offsetGet($offset)
+    public function &offsetGet($offset):mixed
     {
         throw new PropelException('The On Demand Collection does not allow access by offset');
     }
@@ -139,7 +139,7 @@ class OnDemandCollection extends Collection
      * @param integer $offset
      * @param mixed   $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value):void
     {
         throw new ReadOnlyModelException('The On Demand Collection is read only');
     }
@@ -148,7 +148,7 @@ class OnDemandCollection extends Collection
      * @throws \Propel\Runtime\Collection\Exception\ReadOnlyModelException
      * @param  integer                                                     $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset):void
     {
         throw new ReadOnlyModelException('The On Demand Collection is read only');
     }
@@ -179,14 +179,14 @@ class OnDemandCollection extends Collection
      *
      * @return integer Number of results
      */
-    public function count()
+    public function count():int
     {
         return $this->getIterator()->count();
     }
 
     // ArrayObject methods
 
-    public function append($value)
+    public function append($value):void
     {
         throw new ReadOnlyModelException('The On Demand Collection is read only');
     }
