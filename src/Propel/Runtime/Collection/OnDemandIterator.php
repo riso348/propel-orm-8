@@ -43,7 +43,7 @@ class OnDemandIterator implements \Iterator
     protected $enableInstancePoolingOnFinish;
 
     /**
-     * @param AbstractFormatter    $formatter
+     * @param AbstractFormatter $formatter
      * @param DataFetcherInterface $dataFetcher
      */
     public function __construct(AbstractFormatter $formatter, DataFetcherInterface $dataFetcher)
@@ -68,7 +68,7 @@ class OnDemandIterator implements \Iterator
      *
      * @return integer Number of results
      */
-    public function count()
+    public function count(): int
     {
         return $this->dataFetcher->count();
     }
@@ -79,11 +79,11 @@ class OnDemandIterator implements \Iterator
      * Gets the current Model object in the collection
      * This is where the hydration takes place.
      *
+     * @return ActiveRecordInterface
      * @see ObjectFormatter::getAllObjectsFromRow()
      *
-     * @return ActiveRecordInterface
      */
-    public function current()
+    public function current(): mixed
     {
         return $this->formatter->getAllObjectsFromRow($this->currentRow);
     }
@@ -93,7 +93,7 @@ class OnDemandIterator implements \Iterator
      *
      * @return string
      */
-    public function key()
+    public function key(): mixed
     {
         return $this->currentKey;
     }
@@ -102,11 +102,11 @@ class OnDemandIterator implements \Iterator
      * Advances the cursor in the statement
      * Closes the cursor if the end of the statement is reached
      */
-    public function next()
+    public function next(): void
     {
         $this->currentRow = $this->dataFetcher->fetch();
         $this->currentKey++;
-        $this->isValid = (Boolean) $this->currentRow;
+        $this->isValid = (boolean)$this->currentRow;
         if (!$this->isValid) {
             $this->closeCursor();
         }
@@ -116,7 +116,7 @@ class OnDemandIterator implements \Iterator
      * Initializes the iterator by advancing to the first position
      * This method can only be called once (this is a NoRewindIterator)
      */
-    public function rewind()
+    public function rewind(): void
     {
         // check that the hydration can begin
         if (null === $this->formatter) {
@@ -136,8 +136,8 @@ class OnDemandIterator implements \Iterator
     /**
      * @return boolean
      */
-    public function valid()
+    public function valid(): bool
     {
-        return (Boolean) $this->isValid;
+        return (boolean)$this->isValid;
     }
 }
