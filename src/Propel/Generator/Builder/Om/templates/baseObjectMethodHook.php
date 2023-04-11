@@ -10,7 +10,9 @@
         $refObj = new \ReflectionObject($this);
         if ($refObj->getParentClass() && $refObj->getParentClass()->getName() !== self::class) {
             $method = $refObj->getParentClass()->getMethod('preSave');
-            return $method->invoke($this, $con);
+            if ($method->getDeclaringClass()->getName() !== self::class) {
+                return $method->invoke($this, $con);
+            }
         }
         return true;
     }
@@ -42,7 +44,9 @@
         $refObj = new \ReflectionObject($this);
         if ($refObj->getParentClass() && $refObj->getParentClass()->getName() !== self::class) {
             $method = $refObj->getParentClass()->getMethod('preInsert');
-            return $method->invoke($this, $con);
+            if ($method->getDeclaringClass()->getName() !== self::class) {
+                return $method->invoke($this, $con);
+            }
         }
         return true;
     }
@@ -74,7 +78,9 @@
         $refObj = new \ReflectionObject($this);
         if ($refObj->getParentClass() && $refObj->getParentClass()->getName() !== self::class) {
             $method = $refObj->getParentClass()->getMethod('preUpdate');
-            return $method->invoke($this, $con);
+            if ($method->getDeclaringClass()->getName() !== self::class) {
+                return $method->invoke($this, $con);
+            }
         }
         return true;
     }
@@ -106,7 +112,9 @@
         $refObj = new \ReflectionObject($this);
         if ($refObj->getParentClass() && $refObj->getParentClass()->getName() !== self::class) {
             $method = $refObj->getParentClass()->getMethod('preDelete');
-            return $method->invoke($this, $con);
+            if ($method->getDeclaringClass()->getName() !== self::class) {
+                return $method->invoke($this, $con);
+            }
         }
         return true;
     }
